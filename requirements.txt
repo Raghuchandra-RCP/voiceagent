@@ -1,0 +1,44 @@
+# ── LLM + local STT/TTS ───────────────────────────────────────────────────────
+google-genai>=1.0.0       # Gemini 2.5 Flash — LLM + vision
+groq>=0.11.0              # Hosted Whisper large-v3-turbo (primary STT)
+faster-whisper>=1.0.0     # local speech-to-text (fallback)
+piper-tts>=1.2.0          # local text-to-speech (uses models/en/en_US/... .onnx)
+
+# ── Agent orchestration ───────────────────────────────────────────────────────
+# LLM ⇄ tool loop runs as a LangGraph StateGraph (see app/pipeline/llm.py).
+# We still call google-genai directly inside the nodes so the Gemini key
+# rotation and vision path work unchanged — no LangChain chat model needed.
+langgraph>=0.2.0
+
+# ── Turn detection (VAD) ──────────────────────────────────────────────────────
+webrtcvad-wheels>=2.0.14  # prebuilt Windows wheels for webrtcvad
+
+# ── Config & environment ──────────────────────────────────────────────────────
+pydantic-settings>=2.2.0
+python-dotenv>=1.0.0
+
+# ── Desktop control (Windows) ─────────────────────────────────────────────────
+# Used by builtin tools: press_hotkey, type_text, click_at, mouse_move
+pyautogui>=0.9.54
+pyperclip>=1.8.2
+# Window management (list_windows, focus_window)
+pygetwindow>=0.0.9
+# Screenshot capture (read_screen)
+mss>=10.0
+pillow>=10.0
+# System control (system_control)
+pycaw>=20240210           # volume + mute (Windows Core Audio)
+comtypes>=1.4             # required by pycaw
+screen-brightness-control>=0.24  # brightness
+
+# ── CLI Jarvis: mic + speakers + hotkey + toast ───────────────────────────────
+sounddevice>=0.4.6
+numpy>=1.24
+pynput>=1.7               # global hotkey (Ctrl+Space) trigger
+plyer>=2.1                # optional desktop toast for silent tools
+
+# ── Wake word (optional) ──────────────────────────────────────────────────────
+# openwakeword pulls in tflite-runtime + onnxruntime (~250 MB).
+# Only needed if you set JARVIS_MODE=wake. Install manually:
+#   pip install openwakeword
+

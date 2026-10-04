@@ -1,0 +1,9 @@
+{
+  "_comment": "Name → phone number map. Numbers must include country code (E.164), e.g. +919876543210. Names are case-insensitive. Edit this file to add your contacts.",
+  "contacts": {
+    "ammulu": "",
+    "mom": "",
+    "nani": "",
+    "anna":""
+  }
+}

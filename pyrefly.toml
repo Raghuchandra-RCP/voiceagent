@@ -1,0 +1,10 @@
+# Pyrefly configuration
+# Points the type checker at the virtual environment so third-party
+# packages (websockets, fastapi, pydantic, etc.) resolve correctly.
+
+[python]
+interpreter = ".venv/Scripts/python.exe"
+
+[project]
+include = ["app"]
+exclude = [".venv/**", "**/__pycache__/**"]
